@@ -28,9 +28,9 @@ export const EmployeeList = () => {
 
     return (
         <div>
-            <h2>Create a grid of Employees</h2>
+            <h2 className="text-3xl font-bold underline">Create a grid of Employees</h2>
             {employees.map((employee, index) => (
-                    <li key={index}>{employee.name}</li>
+                    <li key={index} >{employee.name}</li>
                 ))
             }
         </div>

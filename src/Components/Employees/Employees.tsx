@@ -27,13 +27,13 @@ export const EmployeeList = () => {
     return (
         <div>
             <h1 className="font-bold text-4xl">Wall of Ninjas</h1>
-            <div className="grid gap-4 grid-cols-4 p-10">
+            <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 p-10">
             {
                 employees.map((employee, index) => (
                     <div key={employee.name} className="max-w-xs rounded-lg shadow-lg">
                         { 
                             (employee.imagePortraitUrl === null)
-                                ?   <img key={employee.imagePortraitUrl} className="w-fit h-fit pt-4" src="https://via.placeholder.com/320x440" alt={`placeholder for ${employee.name}`} />
+                                ?   <img key={employee.imagePortraitUrl} className="w-fit h-fit pt-4" src="https://placeimg.com/320/440/tech/grayscale" alt={`placeholder for ${employee.name}`} />
                                 :   <img key={employee.imagePortraitUrl} className="w-fit h-fit pt-4" src={`${employee.imagePortraitUrl}`} alt={`img of ${employee.name}`} /> 
                         }
                         <div className="grid grid-cols-2 p-4" >

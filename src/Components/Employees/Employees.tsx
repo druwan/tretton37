@@ -27,7 +27,7 @@ export const EmployeeList = () => {
     return (
         <div>
             <h1 className="font-bold text-4xl">Wall of Ninjas</h1>
-            <div className="grid gap-4 grid-cols-4 p-10">
+            <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 p-10">
             {
                 employees.map((employee, index) => (
                     <div key={employee.name} className="max-w-xs rounded-lg shadow-lg">

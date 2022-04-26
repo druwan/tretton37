@@ -8,7 +8,7 @@ export interface Employee {
     mainText: string,
     gitHub: string,
     twitter: string,
-    stackOverflow: string | null,
+    stackOverflow: string,
     linkedIn: string,
     imagePortraitUrl: string,
     imageWallOfLeetUrl: string,

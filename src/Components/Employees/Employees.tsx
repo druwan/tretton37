@@ -62,7 +62,7 @@ export const EmployeeList = () => {
                                 <div>{employee.name} </div>
                                 <div>Office: {employee.office}</div>
                             </div>
-                            <SocialMedia key={ index } gitHub={ employee.gitHub } linkedIn={ employee.linkedIn } twitter={ employee.twitter } stackOverflow={ employee.stackOverflow } />
+                            <SocialMedia key={ index } employee={employee} />
                         </div>
                     </div>
                 ))

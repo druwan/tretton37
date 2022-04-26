@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronized]
 
 jobs:
   simple_deployment_pipeline:
@@ -26,4 +29,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'cv-tretton37'
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-          # buildpack: https://github.com/mars/create-react-app-buildpack.git
+          buildpack: https://github.com/mars/create-react-app-buildpack.git

@@ -39,16 +39,16 @@ export const EmployeeList = () => {
         { value: null, label: "No Office" },
     ]
 
-    const handleChange = (selectedOffice: any) => {
-        setSelectedOffice(selectedOffice.value)
+    const handleChange = (officeLocation: any) => {
+        setSelectedOffice(officeLocation.value)
+        console.log(selectedOffice);
+        
     }
     
     return (
         <div>
-            <h1 className="font-bold text-4xl">Wall of Ninjas</h1>
-            <div className="flex row-auto">
-                <Select options={officeOptions} onChange={handleChange} className="items-center w-1/4" />
-            </div>
+            <Select options={officeOptions} onChange={handleChange} className="items-center w-1/4" />
+
             <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 p-10">
             {
                 employees.map((employee, index) => (

@@ -2,7 +2,7 @@ import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Employee } from "../../types"
 import Select from "react-select";
-import { SocialMedia } from "../SocialMedia/SocialMedia";
+import { EmployeeCard } from "../Employee/EmployeeCard";
 
 const url = process.env.REACT_APP_SECRET_URL as string;
 const header = process.env.REACT_APP_SECRET_HEADER as string
@@ -10,8 +10,8 @@ const header = process.env.REACT_APP_SECRET_HEADER as string
 
 export const EmployeeList = () => {
     const [employees, setEmployees] = useState<Employee[]>([])
-    const [selectedOffice, setSelectedOffice] = useState('')
-  
+    const [filterEmployees, setFilterEmployees] = useState(employees)
+     
     useEffect(() => {
         const fetchEmployees = async () => {
         const headers = {
@@ -38,37 +38,19 @@ export const EmployeeList = () => {
         { value: null, label: "No Office" },
     ]
 
-    const handleChange = (officeLocation: any) => {
-        setSelectedOffice(officeLocation.value)
-        console.log(selectedOffice);
-        
+    const handleChange = (officeLocation: any) => {   
+        // If no option -> show all employees   
+        setFilterEmployees(employees)
+        setFilterEmployees(employees.filter(employee => employee.office === officeLocation.value))
     }
     
     return (
         <div>
-            <Select options={officeOptions} onChange={handleChange} className="items-center w-1/4" />
-
-            <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 p-10">
-            {
-                employees.map((employee, index) => (
-                    <div key={employee.name} className="max-w-xs rounded-lg shadow-lg">
-                        { 
-                            (employee.imagePortraitUrl === null)
-                                ?   <img key={employee.imagePortraitUrl} className="w-fit h-fit pt-4" src="https://placeimg.com/320/440/tech/grayscale" alt={`placeholder for ${employee.name}`} />
-                                :   <img key={employee.imagePortraitUrl} className="w-fit h-fit pt-4" src={`${employee.imagePortraitUrl}`} alt={`img of ${employee.name}`} /> 
-                        }
-                        <div className="grid grid-cols-2 p-4" >
-                            <div key={employee.name} className="grid grid-rows-2 grid-flow-col text-left">
-                                <div>{employee.name} </div>
-                                <div>Office: {employee.office}</div>
-                            </div>
-                            <SocialMedia key={ index } gitHub={ employee.gitHub } linkedIn={ employee.linkedIn } twitter={ employee.twitter } stackOverflow={ employee.stackOverflow } />
-                        </div>
-                    </div>
-                ))
-            }
+            <div>
+                <Select options={officeOptions} onChange={handleChange} className="items-center w-1/4" defaultValue={null}/>
+                <button>hej</button>
             </div>
+            <EmployeeCard employees={filterEmployees} />
         </div>
-        
     )
 }

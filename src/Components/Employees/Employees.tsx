@@ -1,9 +1,8 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Employee } from "../../types"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faTwitter, faLinkedin, faStackOverflow } from "@fortawesome/free-brands-svg-icons";
 import Select from "react-select";
+import { SocialMedia } from "../SocialMedia/SocialMedia";
 
 const url = process.env.REACT_APP_SECRET_URL as string;
 const header = process.env.REACT_APP_SECRET_HEADER as string
@@ -63,15 +62,7 @@ export const EmployeeList = () => {
                                 <div>{employee.name} </div>
                                 <div>Office: {employee.office}</div>
                             </div>
-                            <div key={index} className="text-right mx-1">
-                                
-                                <span>
-                                    {employee.linkedIn && <a href={`https://www.linkedin.com${employee.linkedIn}`}><FontAwesomeIcon icon={faLinkedin} size="lg"/></a>}&nbsp;
-                                    {employee.gitHub && <a href={`https://www.github.com/${employee.gitHub}`}><FontAwesomeIcon icon={faGithub} size="lg"/></a>}&nbsp;
-                                    {employee.twitter && <a href={`https://www.twitter.com/${employee.twitter}`}><FontAwesomeIcon icon={faTwitter} size="lg"/></a>}&nbsp;
-                                    {employee.stackOverflow && <a href={`https://www.stackoverflow.com/users/${employee.stackOverflow}`}><FontAwesomeIcon icon={faStackOverflow} size="lg"/></a>}
-                                </span>
-                            </div>
+                            <SocialMedia key={ index } gitHub={ employee.gitHub } linkedIn={ employee.linkedIn } twitter={ employee.twitter } stackOverflow={ employee.stackOverflow } />
                         </div>
                     </div>
                 ))

@@ -2,9 +2,7 @@ import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Employee } from "../../types"
 import Select from "react-select";
-import { SocialMedia } from "../SocialMedia/SocialMedia";
-import { InfoBox } from "../Employee/InfoBox";
-import { ProfilePicture } from "../Employee/ProfilePicture";
+import { EmployeeCard } from "../Employee/EmployeeCard";
 
 const url = process.env.REACT_APP_SECRET_URL as string;
 const header = process.env.REACT_APP_SECRET_HEADER as string
@@ -12,8 +10,8 @@ const header = process.env.REACT_APP_SECRET_HEADER as string
 
 export const EmployeeList = () => {
     const [employees, setEmployees] = useState<Employee[]>([])
-    const [selectedOffice, setSelectedOffice] = useState('')
-  
+    const [filterEmployees, setFilterEmployees] = useState(employees)
+     
     useEffect(() => {
         const fetchEmployees = async () => {
         const headers = {
@@ -40,30 +38,19 @@ export const EmployeeList = () => {
         { value: null, label: "No Office" },
     ]
 
-    const handleChange = (officeLocation: any) => {
-        setSelectedOffice(officeLocation.value)
-        console.log(selectedOffice);
-        
+    const handleChange = (officeLocation: any) => {   
+        // If no option -> show all employees   
+        setFilterEmployees(employees)
+        setFilterEmployees(employees.filter(employee => employee.office === officeLocation.value))
     }
     
     return (
         <div>
-            <Select options={officeOptions} onChange={handleChange} className="items-center w-1/4" />
-
-            <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 p-10">
-            {
-                employees.map((employee, index) => (
-                    <div key={employee.name} className="max-w-xs rounded-lg shadow-lg">
-                        <ProfilePicture employee={employee} />
-                        <div className="grid grid-cols-2 p-4" >
-                            <InfoBox key={employee.name} employee={employee} />
-                            <SocialMedia key={ index } employee={employee} />
-                        </div>
-                    </div>
-                ))
-            }
+            <div>
+                <Select options={officeOptions} onChange={handleChange} className="items-center w-1/4" defaultValue={null}/>
+                <button>hej</button>
             </div>
+            <EmployeeCard employees={filterEmployees} />
         </div>
-        
     )
 }

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react"
 import { Employee } from "../../types"
 import Select from "react-select";
 import { SocialMedia } from "../SocialMedia/SocialMedia";
+import { InfoBox } from "../Employee/InfoBox";
+import { ProfilePicture } from "../Employee/ProfilePicture";
 
 const url = process.env.REACT_APP_SECRET_URL as string;
 const header = process.env.REACT_APP_SECRET_HEADER as string
@@ -52,16 +54,9 @@ export const EmployeeList = () => {
             {
                 employees.map((employee, index) => (
                     <div key={employee.name} className="max-w-xs rounded-lg shadow-lg">
-                        { 
-                            (employee.imagePortraitUrl === null)
-                                ?   <img key={employee.imagePortraitUrl} className="w-fit h-fit pt-4" src="https://placeimg.com/320/440/tech/grayscale" alt={`placeholder for ${employee.name}`} />
-                                :   <img key={employee.imagePortraitUrl} className="w-fit h-fit pt-4" src={`${employee.imagePortraitUrl}`} alt={`img of ${employee.name}`} /> 
-                        }
+                        <ProfilePicture employee={employee} />
                         <div className="grid grid-cols-2 p-4" >
-                            <div key={employee.name} className="grid grid-rows-2 grid-flow-col text-left">
-                                <div>{employee.name} </div>
-                                <div>Office: {employee.office}</div>
-                            </div>
+                            <InfoBox key={employee.name} employee={employee} />
                             <SocialMedia key={ index } employee={employee} />
                         </div>
                     </div>

@@ -3,12 +3,15 @@ import React, { useEffect, useState } from "react"
 import { Employee } from "../../types"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faTwitter, faLinkedin, faStackOverflow } from "@fortawesome/free-brands-svg-icons";
+import Select from "react-select";
 
 const url = process.env.REACT_APP_SECRET_URL as string;
 const header = process.env.REACT_APP_SECRET_HEADER as string
 
+
 export const EmployeeList = () => {
     const [employees, setEmployees] = useState<Employee[]>([])
+    const [selectedOffice, setSelectedOffice] = useState('')
   
     useEffect(() => {
         const fetchEmployees = async () => {
@@ -24,9 +27,28 @@ export const EmployeeList = () => {
         fetchEmployees()
     }, [])
 
+    // const officeLocations = (new Set(employees.map(employee => employee.office)))
+    // Hardcoding it...
+    const officeOptions = [
+        { value: "Borlänge", label: "Borlänge" },
+        { value: "Helsingborg", label: "Helsingborg" },
+        { value: "Ljubljana", label: "Ljubljana" },
+        { value: "Lund", label: "Lund" },
+        { value: "Stockholm", label: "Stockholm" },
+        { value: "Öresund", label: "Öresund" },
+        { value: null, label: "No Office" },
+    ]
+
+    const handleChange = (selectedOffice: any) => {
+        setSelectedOffice(selectedOffice.value)
+    }
+    
     return (
         <div>
             <h1 className="font-bold text-4xl">Wall of Ninjas</h1>
+            <div className="flex row-auto">
+                <Select options={officeOptions} onChange={handleChange} className="items-center w-1/4" />
+            </div>
             <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 p-10">
             {
                 employees.map((employee, index) => (

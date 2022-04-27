@@ -6,7 +6,8 @@ module.exports = {
     extend: {
       colors: {
         '13Blue': '#0c0c91',
-        '13Green': '#05e273'
+        '13Green': '#05e273',
+        '13Pink': '#fff2f8'
       }
     },
   },

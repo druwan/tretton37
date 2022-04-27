@@ -5,7 +5,7 @@ import { NavBar } from './Components/NavBar/NavBar';
 
 const App = () => { 
   return (
-    <div className='App'>
+    <div className='App bg-13Pink'>
       <NavBar />
       <EmployeeList />
     </div>

@@ -58,12 +58,15 @@ export const EmployeeList = () => {
 
     return (
         <div>
-            <div className="flex">
-                <Select options={officeOptions} onChange={handleSelect} className="items-center w-1/4" placeholder="Select Office" />
+            <div className="p-10 flex justify-between relative">
+                <div className="flex flex-wrap items-stretch">
+                    <input type="search" placeholder="Search Employees" aria-label="Search" onChange={(e) => handleSearch(e.target.value)} className="form-input block rounded-md border-gray-300 w-3/4" />
+                    <div>
+                        <FontAwesomeIcon icon={faSistrix} size="2x" transform="down-2 right-1" />
+                    </div>    
+                </div>
+                <Select options={officeOptions} onChange={handleSelect} className="block items-center w-1/4" placeholder="Select Office" />
                 <button onClick={() => setFilterEmployees(employees)} className="rounded-full bg-green-200" >Clear filter</button>
-            </div>
-            <div>
-                <input type="search" placeholder="Search Employees" aria-label="Search" onChange={(e) => handleSearch(e.target.value)} /> <FontAwesomeIcon icon={faSistrix} size="2x" transform="down-2 right-1" />
             </div>
             <EmployeeCard employees={filterEmployees} />
         </div>

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react"
 import { Employee } from "../../types"
 import Select from "react-select";
 import { EmployeeCard } from "../Employee/EmployeeCard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSistrix } from "@fortawesome/free-brands-svg-icons";
 
 const url = process.env.REACT_APP_SECRET_URL as string;
 const header = process.env.REACT_APP_SECRET_HEADER as string
@@ -42,15 +44,26 @@ export const EmployeeList = () => {
         { value: null, label: "No Office" },
     ]
 
-    const handleChange = (officeLocation: any) => {  
+    const handleSelect = (officeLocation: any) => {  
         setFilterEmployees(employees.filter(employee => employee.office === officeLocation.value))
-    }   
-    
+    }
+    // .join('').toLowerCase().includes(searchEmployees.toLowerCase())
+    const handleSearch = (searchEmployees: string) => {
+        const searchResult = employees.filter((employee) => {
+            return Object.values(employee.name).join('').toLowerCase().includes(searchEmployees.toLowerCase())
+        })
+        setFilterEmployees(searchResult);
+                
+    }
+
     return (
         <div>
             <div className="flex">
-                <Select options={officeOptions} onChange={handleChange} className="items-center w-1/4" placeholder="Select Office" />
-                <button onClick={() => setFilterEmployees(employees)}>Clear filter</button>
+                <Select options={officeOptions} onChange={handleSelect} className="items-center w-1/4" placeholder="Select Office" />
+                <button onClick={() => setFilterEmployees(employees)} className="rounded-full bg-green-200" >Clear filter</button>
+            </div>
+            <div>
+                <input type="search" placeholder="Search Employees" aria-label="Search" onChange={(e) => handleSearch(e.target.value)} /> <FontAwesomeIcon icon={faSistrix} size="2x" transform="down-2 right-1" />
             </div>
             <EmployeeCard employees={filterEmployees} />
         </div>

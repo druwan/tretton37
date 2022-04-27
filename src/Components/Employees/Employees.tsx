@@ -26,6 +26,10 @@ export const EmployeeList = () => {
         fetchEmployees()
     }, [])
 
+    // Set initial filteredEmployees to employees
+    useEffect(() => {setFilterEmployees(employees)},[employees])
+
+    // Get unique office locations
     // const officeLocations = (new Set(employees.map(employee => employee.office)))
     // Hardcoding it...
     const officeOptions = [
@@ -38,17 +42,15 @@ export const EmployeeList = () => {
         { value: null, label: "No Office" },
     ]
 
-    const handleChange = (officeLocation: any) => {   
-        // If no option -> show all employees   
-        setFilterEmployees(employees)
+    const handleChange = (officeLocation: any) => {  
         setFilterEmployees(employees.filter(employee => employee.office === officeLocation.value))
-    }
+    }   
     
     return (
         <div>
-            <div>
-                <Select options={officeOptions} onChange={handleChange} className="items-center w-1/4" defaultValue={null}/>
-                <button>hej</button>
+            <div className="flex">
+                <Select options={officeOptions} onChange={handleChange} className="items-center w-1/4" placeholder="Select Office" />
+                <button onClick={() => setFilterEmployees(employees)}>Clear filter</button>
             </div>
             <EmployeeCard employees={filterEmployees} />
         </div>

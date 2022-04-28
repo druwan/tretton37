@@ -68,8 +68,4 @@ These are edited in your github repo settings, under Security -> Secrets. You al
 
 
 ## Preview of app
-<details>
-    <summary>Show</summary>
-
-    ![App Preview!](Preview.png "Preview of App")
-</details>
+![App Preview!](Preview.png "Preview of App")

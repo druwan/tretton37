@@ -73,7 +73,7 @@ export const EmployeeList = () => {
         </div>
         <div className="flex">
           <Select options={officeOptions} onChange={handleSelect} className="office-locations" placeholder="Select Office" />
-          <button onClick={() => setFilterEmployees(employees)} className="rounded-full bg-13Green/100" >Clear filter</button>
+          <button onClick={() => setFilterEmployees(employees)} className="rounded-full bg-13Green/40" >Clear filter</button>
         </div>
       </div>
       <EmployeeCard employees={filterEmployees} />

@@ -65,3 +65,11 @@ heroku_email: ${{ secrets.HEROKU_EMAIL }}
 ```
 
 These are edited in your github repo settings, under Security -> Secrets. You also need to add your `REACT_APP_SECRET_HEADER` and `REACT_APP_SECRET_URL` as Config Vars on your application on heroku.
+
+
+## Preview of app
+<details>
+    <summary>Show</summary>
+
+    ![App Preview!](Preview.png "Preview of App")
+</details>

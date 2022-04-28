@@ -1,46 +1,67 @@
-# Getting Started with Create React App
+# _The Fellowship of 1337
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Code assignment to create a [site](https://cv-tretton37.herokuapp.com/) to display all of our tretton37-colleagues according to some selected user stories.
 
-## Available Scripts
+## Selected functionalities
 
-In the project directory, you can run:
+| _design/accessibility | _functionality | _testing/QA |
+| --- | --- | --- |
+| Responsive design, works on mobile and tablets | Filter by name and office | Use Typescript (or similar, no any's!) |
+| Use modern CSS throughout the application (css-grid, variables, clamp etc) | Available on a free public url (such as Azure, Heroku) | End-to-end testing (with an existing framework) |
+| | CI/CD pipeline from your repo (e.g. Travis, Gitlab, Azure) | 
 
-### `npm start`
+### Reasoning
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Tailwindcss is a modern framework that a wanted to explore more of. It is designed with a mobile first system which makes handling responsiveness a breeze.
+
+The implementation of filtering by name is done by a search filter. Filtering by office is made using a React-Select control.
+
+The project is hosted on heroku, [live demo](https://cv-tretton37.herokuapp.com/). I've added an automatic pipeline, by using github actions, that pushes, and builds, the most recent commit on the main branch onto heroku. To make sure that the build will not break I've protected the main branch to only deploy if the deployment pipeline passes.
+
+By using Typescript I know immediately when developing the code if I have made an error. And also makes sure that I get the correct type.
+
+I implemented 3 short test cases with Cypress. 
+1. User can open webpage -> Asserts with checking the navbar header
+2. User can search for an employee -> Assert with searching for unique user
+3. User can select an office -> Asserts with selecting Lund as office
+
+
+## Installation
+
+Clone the project and move into the cloned folder 
+```bash
+git clone git@github.com:druwan/tretton37.git
+cd tretton37
+```
+
+Install the dependencies `npm install`
+
+
+### Setup
+
+Create an .env file and add
+```bash
+REACT_APP_SECRET_HEADER = YOUR_AUTH_KEY
+REACT_APP_SECRET_URL = YOUR_API_URL
+```
+
+Run the app [locally](http://localhost:3000) by using `npm start`.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+### Testing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Run `npm run test:e2e` to view basic test cases with Cypress.
 
-### `npm run build`
+### Deployment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To deploy the code you need to create an heroku application and edit the heroku information in `/github/workflows/deploy.yml`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```yml
+heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+heroku_app_name: YOUR_APP_NAME
+heroku_email: ${{ secrets.HEROKU_EMAIL }}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+These are edited in your github repo settings, under Security -> Secrets. You also need to add your `REACT_APP_SECRET_HEADER` and `REACT_APP_SECRET_URL` as Config Vars on your application on heroku.

@@ -2,11 +2,13 @@ module.exports = {
   env: {
     'node': true,
     'commonjs': true,
-    'es2021': true
+    'es2021': true,
+    'cypress/globals': true
   },
   'extends': [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:cypress/recommended'
   ],
   'parserOptions': {
     'ecmaVersion': 'latest'
@@ -15,6 +17,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: [
     '@typescript-eslint',
+    'cypress',
   ],
   rules: {
     'indent': [
